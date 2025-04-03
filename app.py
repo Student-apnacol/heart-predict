@@ -3,7 +3,7 @@ import pandas as pd
 import pickle
 
 # Load the trained model
-with open('heart_attack_pipeline.pkl', 'rb') as file:
+with open('rm_best_model.pkl', 'rb') as file:
     best_model = pickle.load(file)
 
 st.title("Heart Attack Prediction")
