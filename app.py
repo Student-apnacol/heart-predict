@@ -2,6 +2,10 @@ import streamlit as st
 import pandas as pd
 import pickle
 from sklearn.preprocessing import RobustScaler
+import sklearn
+from sklearn.preprocessing import RobustScaler
+print(sklearn.__version__)
+
 
 # Load the trained model
 with open('rm_best_model.pkl', 'rb') as file:  # Ensure this is the correct filename
