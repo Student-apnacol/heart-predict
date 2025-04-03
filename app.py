@@ -1,9 +1,10 @@
 import streamlit as st
 import pandas as pd
 import pickle
+from sklearn.preprocessing import RobustScaler
 
 # Load the trained model
-with open('rm_best_model.pkl', 'rb') as file:
+with open('heart_attack_pipeline.pkl', 'rb') as file:  # Ensure this is the correct filename
     best_model = pickle.load(file)
 
 st.title("Heart Attack Prediction")
@@ -15,11 +16,21 @@ if uploaded_file is not None:
     st.write("Uploaded Data Preview:")
     st.write(df.head())
 
-    # Ensure 'target' column is not used for prediction
-    if "target" in df.columns:
-        X = df.drop(columns=["target"])
+    # Ensure 'output' column is not used for prediction
+    if "output" in df.columns:
+        X = df.drop(columns=["output"])
     else:
         X = df
+
+    # Identify continuous features (excluding categorical/discrete features)
+    num_features = [col for col in X.columns if X[col].dtype != 'O']
+    discrete_features = [col for col in num_features if len(X[col].unique()) <= 25]
+    continuous_features = [col for col in num_features if col not in discrete_features]
+
+    # Apply RobustScaler only to continuous features
+    if continuous_features:
+        scaler = RobustScaler()
+        X[continuous_features] = scaler.fit_transform(X[continuous_features])
 
     # Predict
     predictions = best_model.predict(X)
@@ -28,5 +39,6 @@ if uploaded_file is not None:
     # Display predictions
     st.write("Predictions:")
     st.write(df.head(400))
+
 
      
