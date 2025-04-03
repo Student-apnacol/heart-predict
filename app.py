@@ -4,7 +4,7 @@ import pickle
 from sklearn.preprocessing import RobustScaler
 
 # Load the trained model
-with open('heart_attack_pipeline.pkl', 'rb') as file:  # Ensure this is the correct filename
+with open('rm_best_model.pkl', 'rb') as file:  # Ensure this is the correct filename
     best_model = pickle.load(file)
 
 st.title("Heart Attack Prediction")
