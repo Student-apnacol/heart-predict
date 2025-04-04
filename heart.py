@@ -3,11 +3,11 @@ import pandas as pd
 import pickle
 
 # Load preprocessor and model
-with open("preprocessor.pkl", "rb") as file:
-    preprocessor = pickle.load(file)
+with open("preprocessor.pkl", "rb") as f:
+    preprocessor = pickle.load(f)
 
-with open("rm_best_model.pkl", "rb") as file:
-    model = pickle.load(file)
+with open("rm_best_model.pkl", "rb") as f:
+    model = pickle.load(f)
 
 st.title("💓 Heart Attack Risk Prediction App")
 
